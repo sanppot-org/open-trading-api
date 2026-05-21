@@ -1,0 +1,12 @@
+services:
+  kis-trade-mcp:
+    build: .
+    image: kis-trade-mcp:latest
+    container_name: kis-trade-mcp
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      FASTMCP_STATELESS_HTTP: "false"
+    restart: unless-stopped

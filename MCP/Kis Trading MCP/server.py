@@ -43,11 +43,11 @@ def main():
         sys.exit(1)
 
     # MCP 서버 설정
+    # fastmcp 2.11+ 호환: stateless_http는 환경변수(FASTMCP_STATELESS_HTTP)로 전달
     mcp_server = FastMCP(
         name="My Awesome MCP Server",
         instructions="This is a server for a specific project.",
         version="1.0.0",
-        stateless_http=False,
     )
 
     # middleware
