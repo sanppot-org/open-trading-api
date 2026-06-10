@@ -1,0 +1,30 @@
+services:
+  kis-code-assistant-mcp:
+    build:
+      context: ./KIS Code Assistant MCP
+    image: kis-code-assistant-mcp:latest
+    container_name: kis-code-assistant-mcp
+    ports:
+      - "8081:8081"
+    environment:
+      PORT: "8081"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8081/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  kis-trade-mcp:
+    build:
+      context: ./Kis Trading MCP
+    image: kis-trade-mcp:latest
+    container_name: kis-trade-mcp
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./Kis Trading MCP/.env
+    environment:
+      FASTMCP_STATELESS_HTTP: "false"
+    restart: unless-stopped
